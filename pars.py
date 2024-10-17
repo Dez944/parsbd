@@ -1,19 +1,29 @@
 mes = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN',
        'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC']
 tsts = []
+resl = []
+dat = []
 
-with open('4242.txt') as tlog:
+t = open('res.txt','w')
+with open('tstbd.mrd', errors = 'ignore') as tlog:
     for i in tlog:
         if 'Test  :' in i:
-            print(tst := (i[i.find('Test  :'):])[8:43].strip())
+            t.write((tst := (i[i.find('Test  :'):])[8:43].strip()))
+            t.write('\n')
             if tst not in tsts:
                 tsts.append(tst[0:43])
-        if 'Result:' in i:
-            print(res := (i[i.find('Result:'):])[0:15])
+
         if (d := 'Date:') in i:
-            d = str(i[i.find(d):])
+            d = i[i.find(d):].strip()
             dt = mes.index(d1 := d[9:12])+1
-            print(f'{d[:8]}.{dt}.{d[13:]}')
+            t.write((rd := f'{d[:8]}.{dt}.{d[13:]}'))
+            t.write('\n')
+            dat.append(rd)
+            f = True
 
+        if 'Result: ' in i and f:
+            t.write((res := (i[i.find(' Result:'):])[0:15].strip()))
+            t.write('\n')
+            resl.append(res)
+            f = False
 
-print(tsts)
