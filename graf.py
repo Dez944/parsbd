@@ -7,13 +7,6 @@ def on_test_selected(event):
     selected_item = tree.focus()  # Получаем выбранный элемент
     test_name = tree.item(selected_item)['text']  # Извлекаем текст названия теста
 
-    if test_key in cl:
-        # Очистка текстового поля перед добавлением новых данных
-        log_text.delete(1.0, tk.END)
-        # Формируем строки для отображения кортежей
-        logs = "\n".join([f"({x[0]}, {x[1]})" for x in cl[test_key]])
-        log_text.insert(tk.END, logs)
-
 
 # Создаем основное окно
 root = tk.Tk()
