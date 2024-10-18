@@ -10,8 +10,7 @@ with open('tstbd.mrd', errors = 'ignore') as tlog:
         if 'Test  :' in i:
             t.write((tst := (i[i.find('Test  :'):])[8:43].strip()))
             t.write('\n')
-            if tst not in tsts:
-                tsts.append(tst[0:43])
+            tsts.append(tst)
 
         if (d := 'Date:') in i:
             d = i[i.find(d):].strip()
@@ -26,4 +25,3 @@ with open('tstbd.mrd', errors = 'ignore') as tlog:
             t.write('\n')
             resl.append(res)
             f = False
-
